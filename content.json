@@ -1,0 +1,99 @@
+{
+    "Competency-role":{
+        "type": "role",
+        "src": {
+            "from": "./roles",
+            "content": "role.json"
+        }
+    },
+
+    "Competency-card":{
+        "type": "card",
+        "src": {
+            "from": "./employee_profile_card",
+            "manifest": "manifest.json"
+        }
+    },
+    "assessments-card":{
+        "type": "card",
+        "src": {
+            "from": "./assessments_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    
+    "assessment-detail-card":{
+        "type": "card",
+        "src": {
+            "from": "./assessment_detail_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "competency-assessments-card":{
+        "type": "card",
+        "src": {
+            "from": "./competency_assessments_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "certification-assessments-card":{
+        "type": "card",
+        "src": {
+            "from": "./certification_assessments_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "aggregated-score-card":{
+        "type": "card",
+        "src": {
+            "from": "./aggregated_score_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "certifications-list-card":{
+        "type": "card",
+        "src": {
+            "from": "./certifications_list_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "competencies-list-card":{
+        "type": "card",
+        "src": {
+            "from": "./competencies_list_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "expiring-soon-card":{
+        "type": "card",
+        "src": {
+            "from": "./expiring_soon_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "profile-summary-card":{
+        "type": "card",
+        "src": {
+            "from": "./profile_summary_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    },
+    "all-assessments-card":{
+        "type": "card",
+        "src": {
+            "from": "./all_assessments_card",
+            "manifest": "manifest.json",
+            "files": ["CardExtension.js"]
+        }
+    }
+    
+}

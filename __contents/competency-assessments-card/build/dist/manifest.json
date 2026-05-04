@@ -1,0 +1,122 @@
+{
+	"sap.app": {
+		"id": "competency",
+		"type": "card",
+		"title": "Competency Assessment Overview",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5"
+	},
+	"sap.card": {
+		"type": "Analytical",
+		"extension": "./CardExtension",
+		"configuration": {
+			"destinations": {
+				"comp_mat_card": {
+					"name": "comp_mat_card",
+					"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
+				}
+			},
+			"filters": {
+				"roleId": {
+					"type": "Select",
+					"label": "Role",
+					"item": {
+						"path": "/roles",
+						"template": {
+							"key": "{externalCode}",
+							"title": "{externalName}"
+						}
+					},
+					"data": {
+						"request": {
+							"url": "{{destinations.comp_mat_card}}/icv/employees/me"
+						}
+					}
+				}
+			}
+		},
+		"data": {
+			"request": {
+				"url": "{{destinations.comp_mat_card}}/icv/employees/me",
+				"parameters": {
+					"targetRoles": "{filters>/roleId/value}"
+				},
+				"headers": {
+					"Accept": "application/json"
+				}
+			},
+			"path": "/"
+		},
+		"header": {
+			"title": "Competency Assessment Overview",
+			"subtitle": "{defaultFullName}",
+			"status": {
+				"text": "{totalText}"
+			}
+		},
+		"content": {
+			"chartType": "Donut",
+			"title": {
+				"text": "Competency Gap Overview",
+				"alignment": "Left"
+			},
+			"legend": {
+				"visible": true,
+				"position": "Right"
+			},
+			"plotArea": {
+				"dataLabel": {
+					"visible": true,
+					"hideWhenOverlap": true
+				}
+			},
+			"chartProperties": {
+				"plotArea": {
+					"colorPalette": [
+						"#107E3E",
+						"#E9730C",
+						"#BB0000"
+					]
+				}
+			},
+			"data": {
+				"path": "/gapSummary"
+			},
+			"dimensions": [
+				{
+					"name": "Gap Status",
+					"value": "{label}"
+				}
+			],
+			"measures": [
+				{
+					"name": "Count",
+					"value": "{count}"
+				}
+			],
+			"feeds": [
+				{
+					"uid": "color",
+					"type": "Dimension",
+					"values": [
+						"Gap Status"
+					]
+				},
+				{
+					"uid": "size",
+					"type": "Measure",
+					"values": [
+						"Count"
+					]
+				}
+			]
+		}
+	},
+	"sap.ui5": {
+		"flexBundle": false
+	}
+}

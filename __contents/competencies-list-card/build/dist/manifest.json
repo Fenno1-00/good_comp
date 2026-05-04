@@ -1,0 +1,55 @@
+{
+	"sap.app": {
+		"id": "competencies",
+		"type": "card",
+		"title": "{{CARD_TITLE}}",
+		"subTitle": "{{CARD_SUBTITLE}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"i18n": "i18n/i18n.properties"
+	},
+	"sap.ui": {
+		"technology": "UI5"
+	},
+	"sap.card": {
+		"type": "List",
+		"extension": "./CardExtension",
+		"configuration": {
+			"destinations": {
+				"comp_mat_card": {
+					"name": "comp_mat_card",
+					"defaultUrl": "https://flexso-extensions-dev-cmtrx-v3-cmtrx-srv.cfapps.eu10.hana.ondemand.com"
+				}
+			}
+		},
+		"data": {
+			"extension": {
+				"method": "getData"
+			}
+		},
+		"header": {
+			"title": "{{CARD_TITLE}}",
+			"subtitle": "{defaultFullName}",
+			"status": {
+				"text": "{statusText}"
+			}
+		},
+		"content": {
+			"data": {
+				"path": "/items"
+			},
+			"item": {
+				"title": "{title}",
+				"description": "{description}",
+				"highlight": "{highlight}",
+				"info": {
+					"value": "{infoText}"
+				}
+			}
+		}
+	},
+	"sap.ui5": {
+		"flexBundle": false
+	}
+}

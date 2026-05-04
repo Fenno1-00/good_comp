@@ -1,0 +1,46 @@
+{
+    "_version": "3.2.0",
+    "identification": {
+        "id": "comp.role",
+        "title": "Competency Role",
+        "entityType": "role"
+    },
+    "payload": {
+        "apps":[
+            {
+                "id": "employee-profile.app"
+            },
+            {
+                "id": "assessments.app"
+            },
+         
+            {
+                "id": "assessment-detail.app"
+            },
+            {
+                "id": "competency.app"
+            },
+            {
+                "id": "certification.app"
+            },
+            {
+                "id": "aggregated.app"
+            },
+            {
+                "id": "certifications.app"
+            },
+            {
+                "id": "competencies.app"
+            },
+            {
+                "id": "profile.app"
+            },
+            {
+                "id": "expiring.app"
+            },
+            {
+                "id": "all.app"
+            }
+        ]
+    }
+}

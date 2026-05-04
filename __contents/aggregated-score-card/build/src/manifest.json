@@ -1,0 +1,84 @@
+{
+  "sap.app": {
+    "id": "aggregated",
+    "type": "card",
+    "title": "Role Readiness",
+    "applicationVersion": {
+      "version": "1.1.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5"
+  },
+  "sap.card": {
+    "type": "Object",
+
+    "configuration": {
+      "destinations": {
+        "comp_mat_card": {
+          "name": "comp_mat_card",
+          "defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
+        }
+      },
+
+      "filters": {
+        "roleId": {
+          "type": "Select",
+          "label": "Role",
+          "item": {
+            "path": "/roles",
+            "template": {
+              "key": "{externalCode}",
+              "title": "{externalName}"
+            }
+          },
+          "data": {
+            "request": {
+              "url": "{{destinations.comp_mat_card}}/icv/employees/me",
+              "headers": {
+                "Accept": "application/json"
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "data": {
+      "request": {
+        "url": "{{destinations.comp_mat_card}}/icv/employees/me",
+        "parameters": {
+          "targetRoles": "{filters>/roleId/value}"
+        }
+      },
+      "path": "/"
+    },
+
+    "header": {
+      "type": "Numeric",
+      "title": "{defaultFullName}",
+      "subtitle": "{roles/0/externalName}",
+      "icon": {
+        "src": "sap-icon://task"
+      },
+      "mainIndicator": {
+        "number": "{= Math.round(${roles/0/status/value} * 100) / 100 }",
+        "unit": "%",
+        "state": "{= ${roles/0/status/color} === 'Error' ? 'Error' : ${roles/0/status/color} === 'Good' ? 'Good' : 'Critical' }"
+      }
+    },
+
+    "content": {
+      "groups": [
+        {
+          "items": [
+            {
+              "label": "Status",
+              "value": "{roles/0/status/text}"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

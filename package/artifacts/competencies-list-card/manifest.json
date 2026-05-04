@@ -1,0 +1,14 @@
+{
+	"_version": "1.27.0",
+	"_generator": "cpkg-project-template",
+	"sap.artifact": {
+		"id": "competencies",
+		"type": "card",
+		"title": "{{CARD_TITLE}}",
+		"subTitle": "{{CARD_SUBTITLE}}",
+		"i18n": "i18n/i18n.properties",
+		"artifactVersion": {
+			"version": "1.0.0"
+		}
+	}
+}

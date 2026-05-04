@@ -1,0 +1,111 @@
+{
+	"sap.app": {
+		"id": "certification",
+		"type": "card",
+		"title": "{{CARD_TITLE}}",
+		"subTitle": "{{CARD_SUBTITLE}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"i18n": "i18n/i18n.properties"
+	},
+	"sap.ui": {
+		"technology": "UI5"
+	},
+	"sap.card": {
+		"type": "Analytical",
+		"extension": "./CardExtension",
+		"configuration": {
+			"destinations": {
+				"comp_mat_card": {
+					"name": "comp_mat_card",
+					"defaultUrl": "https://flexso-extensions-dev-cmtrx-v3-cmtrx-srv.cfapps.eu10.hana.ondemand.com"
+				}
+			}
+		},
+		"data": {
+			"extension": {
+				"method": "getData"
+			}
+		},
+		"header": {
+			"title": "{{CARD_TITLE}}",
+			"subtitle": "{defaultFullName}"
+		},
+		"content": {
+			"chartType": "Donut",
+			"actions": [
+				{
+					"type": "Custom",
+					"action": "onChartSelect",
+					"parameters": {
+						"label": "{label}"
+					}
+				}
+			],
+			"legend": {
+				"visible": true,
+				"position": "Right"
+			},
+			"plotArea": {
+				"dataLabel": {
+					"visible": true,
+					"hideWhenOverlap": true
+				}
+			},
+			"chartProperties": {
+				"plotArea": {
+					"colorPalette": [
+						"#107E3E",
+						"#E9730C",
+						"#BB0000"
+					]
+				},
+				"interaction": {
+					"selectability": {
+						"mode": "SINGLE"
+					}
+				}
+			},
+			"title": {
+				"text": "{{CHART_TITLE}}",
+				"visible": true,
+				"alignment": "Left"
+			},
+			"data": {
+				"path": "/gapSummary"
+			},
+			"dimensions": [
+				{
+					"name": "Gap Status",
+					"value": "{label}"
+				}
+			],
+			"measures": [
+				{
+					"name": "Count",
+					"value": "{count}"
+				}
+			],
+			"feeds": [
+				{
+					"uid": "color",
+					"type": "Dimension",
+					"values": [
+						"Gap Status"
+					]
+				},
+				{
+					"uid": "size",
+					"type": "Measure",
+					"values": [
+						"Count"
+					]
+				}
+			]
+		}
+	},
+	"sap.ui5": {
+		"flexBundle": false
+	}
+}

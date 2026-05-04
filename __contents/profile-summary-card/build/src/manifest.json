@@ -1,0 +1,76 @@
+{
+  "sap.app": {
+    "id": "profile",
+    "type": "card",
+    "title": "{{CARD_TITLE}}",
+    "subTitle": "{{CARD_SUBTITLE}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "i18n": "i18n/i18n.properties"
+  },
+
+  "sap.ui": {
+    "technology": "UI5"
+  },
+
+  "sap.card": {
+    "type": "Object",
+    "extension": "./CardExtension",
+
+    "configuration": {
+      "destinations": {
+        "comp_mat_card": {
+          "name": "comp_mat_card",
+          "defaultUrl": "https://flexso-extensions-dev-cmtrx-v3-cmtrx-srv.cfapps.eu10.hana.ondemand.com"
+        }
+      }
+    },
+
+    "data": {
+      "extension": {
+        "method": "getData"
+      }
+    },
+
+    "header": {
+      "title": "{defaultFullName}",
+      "subtitle": "{jobCode}",
+      "icon": {
+        "src": "sap-icon://person-placeholder",
+        "shape": "Circle"
+      }
+    },
+
+    "content": {
+      "groups": [
+        {
+          "title": "{{GROUP_PERSONAL}}",
+          "items": [
+            { "label": "{{LABEL_DEPARTMENT}}", "value": "{department}" },
+            { "label": "{{LABEL_DIVISION}}",   "value": "{division}"   },
+            { "label": "{{LABEL_LOCATION}}",   "value": "{location}"   },
+            { "label": "{{LABEL_MANAGER}}",    "value": "{managerName}"}
+          ]
+        },
+        {
+          "title": "{{GROUP_CERTS}}",
+          "items": [
+            { "label": "{{LABEL_TOTAL_CERTS}}",    "value": "{totalCerts}"    },
+            { "label": "{{LABEL_COMPLIANT_CERTS}}", "value": "{compliantCerts}", "state": "Success" },
+            { "label": "{{LABEL_OVERDUE_CERTS}}",  "value": "{overdueCerts}",  "state": "{overdueState}" },
+            { "label": "{{LABEL_EXPIRING_CERTS}}", "value": "{expiringSoon}",  "state": "{expiringState}" }
+          ]
+        },
+        {
+          "title": "{{GROUP_COMPS}}",
+          "items": [
+            { "label": "{{LABEL_TOTAL_COMPS}}",  "value": "{totalCompetencies}"    },
+            { "label": "{{LABEL_ON_TRACK}}",     "value": "{onTrackCompetencies}", "state": "Success" },
+            { "label": "{{LABEL_WITH_GAP}}",     "value": "{withGapCompetencies}", "state": "{gapState}" }
+          ]
+        }
+      ]
+    }
+  }
+}

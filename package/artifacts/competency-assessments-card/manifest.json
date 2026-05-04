@@ -1,0 +1,12 @@
+{
+	"_version": "1.27.0",
+	"_generator": "cpkg-project-template",
+	"sap.artifact": {
+		"id": "competency",
+		"type": "card",
+		"title": "Competency Assessment Overview",
+		"artifactVersion": {
+			"version": "1.0.0"
+		}
+	}
+}

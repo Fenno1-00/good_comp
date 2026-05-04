@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/integration/Extension"],function(r){"use strict";return r.extend("aggregated_score_card.CardExtension",{formatters:{roundScore:function(r){return(Math.round((Number(r)||0)*100)/100).toFixed(2)},headerState:function(r){var e=Number(r)||0;return e>=70?"Good":e>=40?"Critical":"Error"},itemState:function(r){var e=Number(r)||0;return e>=70?"Success":e>=40?"Warning":"Error"}}})});
+//# sourceMappingURL=CardExtension.js.map
