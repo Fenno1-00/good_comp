@@ -1,6 +1,6 @@
 {
   "sap.app": {
-    "id": "certification",
+    "id": "competencycards.certification",
     "type": "card",
     "title": "{{CARD_TITLE}}",
     "subTitle": "{{CARD_SUBTITLE}}",

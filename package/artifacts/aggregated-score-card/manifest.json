@@ -2,7 +2,7 @@
 	"_version": "1.27.0",
 	"_generator": "cpkg-project-template",
 	"sap.artifact": {
-		"id": "aggregated",
+		"id": "competencycards.aggregated",
 		"type": "card",
 		"title": "Role Readiness",
 		"artifactVersion": {

@@ -1,6 +1,6 @@
 {
 	"sap.app": {
-		"id": "expiring",
+		"id": "competencycards.expiring",
 		"type": "card",
 		"title": "{{CARD_TITLE}}",
 		"subTitle": "{{CARD_SUBTITLE}}",

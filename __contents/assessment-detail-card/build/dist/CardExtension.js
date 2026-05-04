@@ -1,2 +1,0 @@
-sap.ui.define(["sap/ui/integration/Extension"],function(e){"use strict";return e.extend("assessment_detail_card.CardExtension",{onDataChanged:function(){var e=this.getCard();var t=e.getModel();if(!t){return}var s=t.getData()||{};var r=Array.isArray(s.assessments)?s.assessments:[];var a=r.filter(function(e){return e.isRoleRelevant===true});t.setProperty("/assessments",a);t.setProperty("/statusText",a.length+" item(s)")}})});
-//# sourceMappingURL=CardExtension.js.map

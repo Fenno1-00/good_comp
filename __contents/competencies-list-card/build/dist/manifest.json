@@ -1,6 +1,6 @@
 {
 	"sap.app": {
-		"id": "competencies",
+		"id": "competencycards.competencies",
 		"type": "card",
 		"title": "{{CARD_TITLE}}",
 		"subTitle": "{{CARD_SUBTITLE}}",

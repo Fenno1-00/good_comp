@@ -1,6 +1,6 @@
 specVersion: "2.0"
 metadata:
-  name: competencies
+  name: competencycards-competencies
   copyright: |-
     * (c) Copyright 2009-${currentYear}
 type: application

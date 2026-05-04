@@ -1,0 +1,45 @@
+<mvc:View
+  controllerName="competencycards.assessmentComponentV2.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin">
+    <VBox visible="{view>/hasRoleFilter}" class="sapUiTinyMarginBottom">
+      <Label text="{i18n>ROLE_LABEL}" labelFor="roleSelect" />
+      <Select
+        id="roleSelect"
+        change=".onRoleChange"
+        items="{view>/roles}"
+        selectedKey="{view>/selectedRoleId}">
+        <core:Item key="{view>key}" text="{view>title}" />
+      </Select>
+    </VBox>
+    <Title
+      level="H5"
+      text="{view>/fullName}"
+      visible="{= !!${view>/fullName} }" />
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }" />
+    <FlexBox
+      alignItems="Stretch"
+      justifyContent="SpaceBetween"
+      renderType="Bare"
+      wrap="Wrap">
+      <VBox class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+        <Label text="{i18n>GAP_LT_MINUS_ONE}" />
+        <ObjectNumber number="{view>/gapCounts/lessThanMinusOne}" />
+      </VBox>
+      <VBox class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+        <Label text="{i18n>GAP_EQ_MINUS_ONE}" />
+        <ObjectNumber number="{view>/gapCounts/equalMinusOne}" />
+      </VBox>
+      <VBox class="sapUiTinyMarginBottom">
+        <Label text="{i18n>GAP_GTE_ZERO}" />
+        <ObjectNumber number="{view>/gapCounts/greaterOrEqualZero}" />
+      </VBox>
+    </FlexBox>
+  </VBox>
+</mvc:View>

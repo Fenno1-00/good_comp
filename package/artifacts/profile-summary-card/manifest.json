@@ -2,7 +2,7 @@
 	"_version": "1.27.0",
 	"_generator": "cpkg-project-template",
 	"sap.artifact": {
-		"id": "profile",
+		"id": "competencycards.profile",
 		"type": "card",
 		"title": "{{CARD_TITLE}}",
 		"subTitle": "{{CARD_SUBTITLE}}",

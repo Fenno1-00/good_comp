@@ -1,11 +1,12 @@
 {
   "sap.app": {
-    "id": "assessment-detail",
+    "id": "assessmentGapList",
     "type": "card",
     "title": "{{CARD_TITLE}}",
     "subTitle": "{{CARD_SUBTITLE}}",
+    "description": "{{CARD_SUBTITLE}}",
     "applicationVersion": {
-      "version": "1.0.0"
+      "version": "1.0.2"
     },
     "i18n": "i18n/i18n.properties"
   },
@@ -13,8 +14,8 @@
     "technology": "UI5"
   },
   "sap.card": {
-    "type": "Table",
-    "extension": "./CardExtension",
+    "type": "List",
+    "extension": "./GapListExtension",
     "configuration": {
       "destinations": {
         "comp_mat_card": {
@@ -45,16 +46,9 @@
       }
     },
     "data": {
-      "request": {
-        "url": "{{destinations.comp_mat_card}}/icv/employees/me",
-        "parameters": {
-          "targetRoles": "{filters>/roleId/value}"
-        },
-        "headers": {
-          "Accept": "application/json"
-        }
-      },
-      "path": "/"
+      "extension": {
+        "method": "getData"
+      }
     },
     "header": {
       "title": "{{CARD_TITLE}}",
@@ -65,48 +59,13 @@
     },
     "content": {
       "data": {
-        "path": "/assessments"
+        "path": "/items"
       },
-      "row": {
-        "columns": [
-          {
-            "title": "{{COL_COMPETENCE}}",
-            "value": "{competence/externalName}",
-            "width": "20%"
-          },
-          {
-            "title": "{{COL_TYPE}}",
-            "value": "{status/type}",
-            "width": "10%"
-          },
-          {
-            "title": "{{COL_CURRENT_STATUS}}",
-            "value": "{status/statusName}",
-            "state": "{= ${status/iconColor} === 'red' ? 'Error' : ${status/iconColor} === 'orange' ? 'Warning' : ${status/iconColor} === 'green' ? 'Success' : 'None'}",
-            "width": "15%"
-          },
-          {
-            "title": "{{COL_TARGET_STATUS}}",
-            "value": "{targetStatus/statusName}",
-            "width": "15%"
-          },
-          {
-            "title": "{{COL_VALID_UNTIL}}",
-            "value": "{= ${validUntil} ? ${validUntil}.slice(0,10) : '—'}",
-            "width": "12%"
-          },
-          {
-            "title": "{{COL_GAP}}",
-            "value": "{gap}",
-            "state": "{= ${gap} >= 0 ? 'Success' : ${gap} === -1 ? 'Warning' : 'Error'}",
-            "width": "8%"
-          },
-          {
-            "title": "{{COL_COMMENT}}",
-            "value": "{= ${comment} ? ${comment} : '—'}",
-            "width": "20%"
-          }
-        ]
+      "item": {
+        "title": "{title}",
+        "info": {
+          "value": "{infoText}"
+        }
       }
     }
   }

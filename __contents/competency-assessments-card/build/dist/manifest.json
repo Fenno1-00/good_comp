@@ -1,6 +1,6 @@
 {
 	"sap.app": {
-		"id": "competency",
+		"id": "competencycards.competency",
 		"type": "card",
 		"title": "Competency Assessment Overview",
 		"applicationVersion": {

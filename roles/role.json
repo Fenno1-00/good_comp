@@ -1,45 +1,45 @@
 {
     "_version": "3.2.0",
     "identification": {
-        "id": "comp.role",
+        "id": "competencycards.role",
         "title": "Competency Role",
         "entityType": "role"
     },
     "payload": {
         "apps":[
             {
-                "id": "employee-profile.app"
+                "id": "competencycards.employeeProfile.app"
             },
             {
-                "id": "assessments.app"
+                "id": "competencycards.assessments.app"
             },
          
             {
-                "id": "assessment-detail.app"
+                "id": "competencycards.assessmentComponentV2.app"
             },
             {
-                "id": "competency.app"
+                "id": "competencycards.competency.app"
             },
             {
-                "id": "certification.app"
+                "id": "competencycards.certification.app"
             },
             {
-                "id": "aggregated.app"
+                "id": "competencycards.aggregated.app"
             },
             {
-                "id": "certifications.app"
+                "id": "competencycards.certifications.app"
             },
             {
-                "id": "competencies.app"
+                "id": "competencycards.competencies.app"
             },
             {
-                "id": "profile.app"
+                "id": "competencycards.profile.app"
             },
             {
-                "id": "expiring.app"
+                "id": "competencycards.expiring.app"
             },
             {
-                "id": "all.app"
+                "id": "competencycards.all.app"
             }
         ]
     }

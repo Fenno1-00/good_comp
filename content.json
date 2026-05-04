@@ -23,12 +23,12 @@
         }
     },
     
-    "assessment-detail-card":{
+    "assessment-component-card":{
         "type": "card",
         "src": {
-            "from": "./assessment_detail_card",
+            "from": "./assessment_component_card",
             "manifest": "manifest.json",
-            "files": ["CardExtension.js"]
+            "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
         }
     },
     "competency-assessments-card":{

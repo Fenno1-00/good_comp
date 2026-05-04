@@ -1,6 +1,6 @@
 {
   "sap.app": {
-    "id": "aggregated",
+    "id": "competencycards.aggregated",
     "type": "card",
     "title": "Role Readiness",
     "applicationVersion": {

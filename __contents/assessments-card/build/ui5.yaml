@@ -1,6 +1,6 @@
 specVersion: "2.0"
 metadata:
-  name: assessments
+  name: competencycards-assessments
   copyright: |-
     * (c) Copyright 2009-${currentYear}
 type: application
