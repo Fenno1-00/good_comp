@@ -12,6 +12,61 @@ sap.ui.define([
     };
   }
 
+  function createChartMarkup(oGapCounts) {
+    var iTotal = oGapCounts.lessThanMinusOne + oGapCounts.equalMinusOne + oGapCounts.greaterOrEqualZero;
+    var iSize = 184;
+    var iCenter = 92;
+    var iRadius = 58;
+    var iStrokeWidth = 20;
+    var fCircumference = 2 * Math.PI * iRadius;
+    var fOffset = 0;
+    var aSegments = [
+      {
+        value: oGapCounts.lessThanMinusOne,
+        color: "#BB0000"
+      },
+      {
+        value: oGapCounts.equalMinusOne,
+        color: "#E9730C"
+      },
+      {
+        value: oGapCounts.greaterOrEqualZero,
+        color: "#107E3E"
+      }
+    ];
+    var aMarkup = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + iSize + '" height="' + iSize + '" viewBox="0 0 ' + iSize + ' ' + iSize + '">',
+      '<circle cx="' + iCenter + '" cy="' + iCenter + '" r="' + iRadius + '" fill="none" stroke="#D5DADD" stroke-width="' + iStrokeWidth + '"/>',
+      '<g transform="rotate(-90 ' + iCenter + ' ' + iCenter + ')">'
+    ];
+
+    if (iTotal > 0) {
+      aSegments.forEach(function (oSegment) {
+        var fLength;
+
+        if (!oSegment.value) {
+          return;
+        }
+
+        fLength = (oSegment.value / iTotal) * fCircumference;
+        aMarkup.push(
+          '<circle cx="' + iCenter + '" cy="' + iCenter + '" r="' + iRadius + '" fill="none" stroke="' + oSegment.color + '" stroke-width="' + iStrokeWidth + '"',
+          ' stroke-linecap="butt" stroke-dasharray="' + fLength.toFixed(3) + ' ' + (fCircumference - fLength).toFixed(3) + '"',
+          ' stroke-dashoffset="' + (-fOffset).toFixed(3) + '"/>',
+          ''
+        );
+        fOffset += fLength;
+      });
+    }
+
+    aMarkup.push('</g>');
+    aMarkup.push('<text x="' + iCenter + '" y="' + (iCenter - 6) + '" text-anchor="middle" font-family="72, Arial, sans-serif" font-size="28" font-weight="700" fill="#1D2D3E">' + iTotal + '</text>');
+    aMarkup.push('<text x="' + iCenter + '" y="' + (iCenter + 20) + '" text-anchor="middle" font-family="72, Arial, sans-serif" font-size="12" fill="#5B738B">Total</text>');
+    aMarkup.push('</svg>');
+
+    return aMarkup.join('');
+  }
+
   return UIComponent.extend("competencycards.assessmentComponentV2.Component", {
     metadata: {
       manifest: "json"
@@ -41,6 +96,7 @@ sap.ui.define([
         selectedRoleId: oOptions.selectedRoleId || "",
         hasRoleFilter: !!oOptions.hasRoleFilter,
         gapCounts: oOptions.gapCounts || createGapCounts(),
+        chartMarkup: oOptions.chartMarkup || createChartMarkup(oOptions.gapCounts || createGapCounts()),
         error: oOptions.error || ""
       };
     },
@@ -181,7 +237,8 @@ sap.ui.define([
             roles: aRoles,
             selectedRoleId: sResolvedRoleId,
             hasRoleFilter: aRoles.length > 1,
-            gapCounts: oGapCounts
+            gapCounts: oGapCounts,
+            chartMarkup: createChartMarkup(oGapCounts)
           }));
         }.bind(this))
         .catch(function () {
@@ -194,6 +251,7 @@ sap.ui.define([
             selectedRoleId: oFailedData.selectedRoleId,
             hasRoleFilter: oFailedData.hasRoleFilter,
             gapCounts: createGapCounts(),
+            chartMarkup: createChartMarkup(createGapCounts()),
             error: "Failed to load data"
           }));
         }.bind(this));

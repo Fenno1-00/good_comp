@@ -2,7 +2,7 @@
 	"sap.package": {
 		"id": "Competency_cards",
 		"packageVersion": {
-			"version": "1.2.29",
+			"version": "1.2.30",
 			"upgradeNotification": "all"
 		},
 		"i18n": "i18n/i18n.properties",
@@ -81,7 +81,7 @@
 						"description": "{{CARD_SUBTITLE}}",
 						"i18n": "i18n/i18n.properties",
 						"artifactVersion": {
-							"version": "1.0.1"
+							"version": "1.0.2"
 						}
 					}
 				},
@@ -586,7 +586,7 @@
 									"subTitle": "{{CARD_SUBTITLE}}",
 									"description": "{{CARD_SUBTITLE}}",
 									"applicationVersion": {
-										"version": "1.0.1"
+										"version": "1.0.2"
 									},
 									"i18n": "i18n/i18n.properties"
 								},

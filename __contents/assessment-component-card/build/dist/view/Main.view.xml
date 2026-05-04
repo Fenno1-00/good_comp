@@ -23,23 +23,29 @@
       text="{view>/error}"
       type="Error"
       visible="{= !!${view>/error} }" />
-    <FlexBox
-      alignItems="Stretch"
+    <HBox
+      alignItems="Center"
       justifyContent="SpaceBetween"
       renderType="Bare"
       wrap="Wrap">
-      <VBox class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
-        <Label text="{i18n>GAP_LT_MINUS_ONE}" />
-        <ObjectNumber number="{view>/gapCounts/lessThanMinusOne}" />
+      <core:HTML content="{view>/chartMarkup}" sanitizeContent="false" />
+      <VBox class="sapUiSmallMarginBegin sapUiTinyMarginTop">
+        <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+          <core:Icon src="sap-icon://circle-task-2" color="#BB0000" size="0.75rem" class="sapUiTinyMarginEnd" />
+          <Label text="{i18n>GAP_LT_MINUS_ONE}" width="8rem" />
+          <ObjectNumber number="{view>/gapCounts/lessThanMinusOne}" />
+        </HBox>
+        <HBox alignItems="Center" class="sapUiTinyMarginBottom">
+          <core:Icon src="sap-icon://circle-task-2" color="#E9730C" size="0.75rem" class="sapUiTinyMarginEnd" />
+          <Label text="{i18n>GAP_EQ_MINUS_ONE}" width="8rem" />
+          <ObjectNumber number="{view>/gapCounts/equalMinusOne}" />
+        </HBox>
+        <HBox alignItems="Center">
+          <core:Icon src="sap-icon://circle-task-2" color="#107E3E" size="0.75rem" class="sapUiTinyMarginEnd" />
+          <Label text="{i18n>GAP_GTE_ZERO}" width="8rem" />
+          <ObjectNumber number="{view>/gapCounts/greaterOrEqualZero}" />
+        </HBox>
       </VBox>
-      <VBox class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
-        <Label text="{i18n>GAP_EQ_MINUS_ONE}" />
-        <ObjectNumber number="{view>/gapCounts/equalMinusOne}" />
-      </VBox>
-      <VBox class="sapUiTinyMarginBottom">
-        <Label text="{i18n>GAP_GTE_ZERO}" />
-        <ObjectNumber number="{view>/gapCounts/greaterOrEqualZero}" />
-      </VBox>
-    </FlexBox>
+    </HBox>
   </VBox>
 </mvc:View>
