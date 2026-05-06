@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("competencycards.roleFilter.controller.Main",{onRoleChange:function(e){this.getOwnerComponent().onRoleChange(e.getSource().getSelectedKey())}})});
+//# sourceMappingURL=Main.controller.js.map

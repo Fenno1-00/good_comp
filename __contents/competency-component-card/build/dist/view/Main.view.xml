@@ -1,0 +1,28 @@
+<mvc:View
+  controllerName="competencycards.competencyComponent.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin">
+    <Title
+      level="H5"
+      text="{view>/fullName}"
+      visible="{= !!${view>/fullName} }" />
+    <Text
+      text="{view>/roleTitle}"
+      visible="{= !!${view>/roleTitle} }"
+      class="sapUiTinyMarginBottom" />
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }" />
+    <HBox
+      alignItems="Center"
+      justifyContent="Center"
+      renderType="Bare"
+      wrap="Wrap">
+      <core:HTML id="chartHtml" content="{view>/chartMarkup}" sanitizeContent="false" />
+    </HBox>
+  </VBox>
+</mvc:View>

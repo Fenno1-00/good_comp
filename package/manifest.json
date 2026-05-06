@@ -2,7 +2,7 @@
 	"sap.package": {
 		"id": "Competency_cards",
 		"packageVersion": {
-			"version": "1.2.30",
+			"version": "1.3.17",
 			"upgradeNotification": "all"
 		},
 		"i18n": "i18n/i18n.properties",
@@ -81,11 +81,47 @@
 						"description": "{{CARD_SUBTITLE}}",
 						"i18n": "i18n/i18n.properties",
 						"artifactVersion": {
-							"version": "1.0.2"
+							"version": "1.0.5"
 						}
 					}
 				},
 				"baseURL": "artifacts/assessment-component-card"
+			},
+			{
+				"manifest": {
+					"_version": "1.27.0",
+					"_generator": "cpkg-project-template",
+					"sap.artifact": {
+						"id": "competencycards.roleFilter",
+						"type": "card",
+						"title": "{{CARD_TITLE}}",
+						"subTitle": "{{CARD_SUBTITLE}}",
+						"description": "{{CARD_SUBTITLE}}",
+						"i18n": "i18n/i18n.properties",
+						"artifactVersion": {
+							"version": "1.0.0"
+						}
+					}
+				},
+				"baseURL": "artifacts/role-filter-card"
+			},
+			{
+				"manifest": {
+					"_version": "1.27.0",
+					"_generator": "cpkg-project-template",
+					"sap.artifact": {
+						"id": "competencycards.competencyComponent",
+						"type": "card",
+						"title": "{{CARD_TITLE}}",
+						"subTitle": "{{CARD_SUBTITLE}}",
+						"description": "{{CARD_SUBTITLE}}",
+						"i18n": "i18n/i18n.properties",
+						"artifactVersion": {
+							"version": "1.0.5"
+						}
+					}
+				},
+				"baseURL": "artifacts/competency-component-card"
 			},
 			{
 				"manifest": {
@@ -113,7 +149,7 @@
 						"subTitle": "{{CARD_SUBTITLE}}",
 						"i18n": "i18n/i18n.properties",
 						"artifactVersion": {
-							"version": "1.0.0"
+							"version": "1.0.2"
 						}
 					}
 				},
@@ -126,9 +162,12 @@
 					"sap.artifact": {
 						"id": "competencycards.aggregated",
 						"type": "card",
-						"title": "Role Readiness",
+						"title": "{{CARD_TITLE}}",
+						"subTitle": "{{CARD_SUBTITLE}}",
+						"description": "{{CARD_SUBTITLE}}",
+						"i18n": "i18n/i18n.properties",
 						"artifactVersion": {
-							"version": "1.1.0"
+							"version": "1.2.4"
 						}
 					}
 				},
@@ -179,11 +218,28 @@
 						"subTitle": "{{CARD_SUBTITLE}}",
 						"i18n": "i18n/i18n.properties",
 						"artifactVersion": {
-							"version": "1.0.0"
+							"version": "1.1.4"
 						}
 					}
 				},
 				"baseURL": "artifacts/expiring-soon-card"
+			},
+			{
+				"manifest": {
+					"_version": "1.27.0",
+					"_generator": "cpkg-project-template",
+					"sap.artifact": {
+						"id": "competencycards.overdueCertificates",
+						"type": "card",
+						"title": "{{CARD_TITLE}}",
+						"subTitle": "{{CARD_SUBTITLE}}",
+						"i18n": "i18n/i18n.properties",
+						"artifactVersion": {
+							"version": "1.0.0"
+						}
+					}
+				},
+				"baseURL": "artifacts/overdue-certificates-card"
 			},
 			{
 				"manifest": {
@@ -196,7 +252,7 @@
 						"subTitle": "{{CARD_SUBTITLE}}",
 						"i18n": "i18n/i18n.properties",
 						"artifactVersion": {
-							"version": "1.0.0"
+							"version": "1.1.5"
 						}
 					}
 				},
@@ -249,6 +305,12 @@
 							"id": "competencycards.assessmentComponentV2.app"
 						},
 						{
+							"id": "competencycards.roleFilter.app"
+						},
+						{
+							"id": "competencycards.competencyComponent.app"
+						},
+						{
 							"id": "competencycards.competency.app"
 						},
 						{
@@ -268,6 +330,9 @@
 						},
 						{
 							"id": "competencycards.expiring.app"
+						},
+						{
+							"id": "competencycards.overdueCertificates.app"
 						},
 						{
 							"id": "competencycards.all.app"
@@ -586,7 +651,7 @@
 									"subTitle": "{{CARD_SUBTITLE}}",
 									"description": "{{CARD_SUBTITLE}}",
 									"applicationVersion": {
-										"version": "1.0.2"
+										"version": "1.0.5"
 									},
 									"i18n": "i18n/i18n.properties"
 								},
@@ -634,8 +699,159 @@
 					{
 						"locale": "",
 						"textDictionary": {
-							"CARD_TITLE": "Assessment Component V2",
-							"CARD_SUBTITLE": "Assessment Data"
+							"CARD_TITLE": "Certification Gap Overview",
+							"CARD_SUBTITLE": "Role-Based Certification Gaps"
+						}
+					}
+				]
+			},
+			{
+				"_version": "3.2.0",
+				"identification": {
+					"id": "competencycards.roleFilter.app",
+					"title": "{{CARD_TITLE}}",
+					"entityType": "businessapp",
+					"description": "{{description}}"
+				},
+				"payload": {
+					"visualizations": {
+						"competencycards.roleFilter.viz": {
+							"vizType": "sap.card",
+							"vizConfig": {
+								"sap.app": {
+									"id": "competencycards.roleFilter",
+									"type": "card",
+									"title": "{{CARD_TITLE}}",
+									"subTitle": "{{CARD_SUBTITLE}}",
+									"description": "{{CARD_SUBTITLE}}",
+									"applicationVersion": {
+										"version": "1.0.0"
+									},
+									"i18n": "i18n/i18n.properties"
+								},
+								"sap.ui": {
+									"technology": "UI5"
+								},
+								"sap.card": {
+									"type": "Component",
+									"configuration": {
+										"destinations": {
+											"comp_mat_card": {
+												"name": "comp_mat_card",
+												"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
+											}
+										}
+									},
+									"header": {
+										"title": "{{CARD_TITLE}}",
+										"subTitle": "{{CARD_SUBTITLE}}"
+									}
+								},
+								"sap.ui5": {
+									"dependencies": {
+										"minUI5Version": "1.96.0",
+										"libs": {
+											"sap.m": {},
+											"sap.ui.core": {}
+										}
+									},
+									"rootView": {
+										"viewName": "competencycards.roleFilter.view.Main",
+										"type": "XML",
+										"async": true,
+										"id": "main"
+									}
+								}
+							},
+							"vizResources": {
+								"artifactId": "competencycards.roleFilter"
+							}
+						}
+					}
+				},
+				"texts": [
+					{
+						"locale": "",
+						"textDictionary": {
+							"CARD_TITLE": "Central Role Filter",
+							"CARD_SUBTITLE": "Shared Role Selection"
+						}
+					}
+				]
+			},
+			{
+				"_version": "3.2.0",
+				"identification": {
+					"id": "competencycards.competencyComponent.app",
+					"title": "{{CARD_TITLE}}",
+					"entityType": "businessapp",
+					"description": "{{description}}"
+				},
+				"payload": {
+					"visualizations": {
+						"competencycards.competencyComponent.viz": {
+							"vizType": "sap.card",
+							"vizConfig": {
+								"sap.app": {
+									"id": "competencycards.competencyComponent",
+									"type": "card",
+									"title": "{{CARD_TITLE}}",
+									"subTitle": "{{CARD_SUBTITLE}}",
+									"description": "{{CARD_SUBTITLE}}",
+									"applicationVersion": {
+										"version": "1.0.5"
+									},
+									"i18n": "i18n/i18n.properties"
+								},
+								"sap.ui": {
+									"technology": "UI5"
+								},
+								"sap.card": {
+									"type": "Component",
+									"configuration": {
+										"destinations": {
+											"comp_mat_card": {
+												"name": "comp_mat_card",
+												"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
+											}
+										}
+									},
+									"header": {
+										"title": "{{CARD_TITLE}}",
+										"subTitle": "{{CARD_SUBTITLE}}"
+									}
+								},
+								"popover": {
+									"active": true
+								},
+								"sap.ui5": {
+									"dependencies": {
+										"minUI5Version": "1.96.0",
+										"libs": {
+											"sap.m": {},
+											"sap.ui.core": {}
+										}
+									},
+									"rootView": {
+										"viewName": "competencycards.competencyComponent.view.Main",
+										"type": "XML",
+										"async": true,
+										"id": "main"
+									}
+								}
+							},
+							"vizResources": {
+								"artifactId": "competencycards.competencyComponent"
+							}
+						}
+					}
+				},
+				"texts": [
+					{
+						"locale": "",
+						"textDictionary": {
+							"CARD_TITLE": "Competency Gap Overview",
+							"CARD_SUBTITLE": "Role-Based Competency Gaps"
 						}
 					}
 				]
@@ -805,7 +1021,7 @@
 									"title": "{{CARD_TITLE}}",
 									"subTitle": "{{CARD_SUBTITLE}}",
 									"applicationVersion": {
-										"version": "1.0.0"
+										"version": "1.0.2"
 									},
 									"i18n": "i18n/i18n.properties"
 								},
@@ -927,7 +1143,7 @@
 				"_version": "3.2.0",
 				"identification": {
 					"id": "competencycards.aggregated.app",
-					"title": "Role Readiness",
+					"title": "{{CARD_TITLE}}",
 					"entityType": "businessapp",
 					"description": "{{description}}"
 				},
@@ -939,78 +1155,45 @@
 								"sap.app": {
 									"id": "competencycards.aggregated",
 									"type": "card",
-									"title": "Role Readiness",
+									"title": "{{CARD_TITLE}}",
+									"subTitle": "{{CARD_SUBTITLE}}",
+									"description": "{{CARD_SUBTITLE}}",
 									"applicationVersion": {
-										"version": "1.1.0"
-									}
+										"version": "1.2.4"
+									},
+									"i18n": "i18n/i18n.properties"
 								},
 								"sap.ui": {
 									"technology": "UI5"
 								},
 								"sap.card": {
-									"type": "Object",
+									"type": "Component",
 									"configuration": {
 										"destinations": {
 											"comp_mat_card": {
 												"name": "comp_mat_card",
 												"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
 											}
-										},
-										"filters": {
-											"roleId": {
-												"type": "Select",
-												"label": "Role",
-												"item": {
-													"path": "/roles",
-													"template": {
-														"key": "{externalCode}",
-														"title": "{externalName}"
-													}
-												},
-												"data": {
-													"request": {
-														"url": "{{destinations.comp_mat_card}}/icv/employees/me",
-														"headers": {
-															"Accept": "application/json"
-														}
-													}
-												}
-											}
 										}
-									},
-									"data": {
-										"request": {
-											"url": "{{destinations.comp_mat_card}}/icv/employees/me",
-											"parameters": {
-												"targetRoles": "{filters>/roleId/value}"
-											}
-										},
-										"path": "/"
 									},
 									"header": {
-										"type": "Numeric",
-										"title": "{defaultFullName}",
-										"subtitle": "{roles/0/externalName}",
-										"icon": {
-											"src": "sap-icon://task"
-										},
-										"mainIndicator": {
-											"number": "{= Math.round(${roles/0/status/value} * 100) / 100 }",
-											"unit": "%",
-											"state": "{= ${roles/0/status/color} === 'Error' ? 'Error' : ${roles/0/status/color} === 'Good' ? 'Good' : 'Critical' }"
+										"title": "{{CARD_TITLE}}",
+										"subTitle": "{{CARD_SUBTITLE}}"
+									}
+								},
+								"sap.ui5": {
+									"dependencies": {
+										"minUI5Version": "1.96.0",
+										"libs": {
+											"sap.m": {},
+											"sap.ui.core": {}
 										}
 									},
-									"content": {
-										"groups": [
-											{
-												"items": [
-													{
-														"label": "Status",
-														"value": "{roles/0/status/text}"
-													}
-												]
-											}
-										]
+									"rootView": {
+										"viewName": "competencycards.aggregated.view.Main",
+										"type": "XML",
+										"async": true,
+										"id": "main"
 									}
 								}
 							},
@@ -1024,7 +1207,8 @@
 					{
 						"locale": "",
 						"textDictionary": {
-							"description": "Business App Description"
+							"CARD_TITLE": "Role Readiness",
+							"CARD_SUBTITLE": "Shared Role Score"
 						}
 					}
 				]
@@ -1208,7 +1392,7 @@
 									"title": "{{CARD_TITLE}}",
 									"subTitle": "{{CARD_SUBTITLE}}",
 									"applicationVersion": {
-										"version": "1.0.0"
+										"version": "1.1.4"
 									},
 									"i18n": "i18n/i18n.properties"
 								},
@@ -1216,41 +1400,33 @@
 									"technology": "UI5"
 								},
 								"sap.card": {
-									"type": "List",
-									"extension": "./CardExtension",
+									"type": "Component",
 									"configuration": {
 										"destinations": {
 											"comp_mat_card": {
 												"name": "comp_mat_card",
-												"defaultUrl": "https://flexso-extensions-dev-cmtrx-v3-cmtrx-srv.cfapps.eu10.hana.ondemand.com"
+												"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
 											}
-										}
-									},
-									"data": {
-										"extension": {
-											"method": "getData"
 										}
 									},
 									"header": {
 										"title": "{{CARD_TITLE}}",
-										"subtitle": "{defaultFullName}",
-										"status": {
-											"text": "{statusText}"
+										"subTitle": "{{CARD_SUBTITLE}}"
+									}
+								},
+								"sap.ui5": {
+									"dependencies": {
+										"minUI5Version": "1.96.0",
+										"libs": {
+											"sap.m": {},
+											"sap.ui.core": {}
 										}
 									},
-									"content": {
-										"data": {
-											"path": "/items"
-										},
-										"item": {
-											"title": "{title}",
-											"description": "{description}",
-											"highlight": "{highlight}",
-											"info": {
-												"value": "{infoText}",
-												"state": "{infoState}"
-											}
-										}
+									"rootView": {
+										"viewName": "competencycards.expiring.view.Main",
+										"type": "XML",
+										"async": true,
+										"id": "main"
 									}
 								}
 							},
@@ -1264,8 +1440,81 @@
 					{
 						"locale": "",
 						"textDictionary": {
-							"CARD_TITLE": "Expiring Soon",
-							"CARD_SUBTITLE": "Items Expiring Soon"
+							"CARD_TITLE": "Expired Certificates",
+							"CARD_SUBTITLE": "Certificates requiring renewal"
+						}
+					}
+				]
+			},
+			{
+				"_version": "3.2.0",
+				"identification": {
+					"id": "competencycards.overdueCertificates.app",
+					"title": "{{CARD_TITLE}}",
+					"entityType": "businessapp",
+					"description": "{{description}}"
+				},
+				"payload": {
+					"visualizations": {
+						"competencycards.overdueCertificates.viz": {
+							"vizType": "sap.card",
+							"vizConfig": {
+								"sap.app": {
+									"id": "competencycards.overdueCertificates",
+									"type": "card",
+									"title": "{{CARD_TITLE}}",
+									"subTitle": "{{CARD_SUBTITLE}}",
+									"applicationVersion": {
+										"version": "1.0.0"
+									},
+									"i18n": "i18n/i18n.properties"
+								},
+								"sap.ui": {
+									"technology": "UI5"
+								},
+								"sap.card": {
+									"type": "Component",
+									"configuration": {
+										"destinations": {
+											"comp_mat_card": {
+												"name": "comp_mat_card",
+												"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
+											}
+										}
+									},
+									"header": {
+										"title": "{{CARD_TITLE}}",
+										"subTitle": "{{CARD_SUBTITLE}}"
+									}
+								},
+								"sap.ui5": {
+									"dependencies": {
+										"minUI5Version": "1.96.0",
+										"libs": {
+											"sap.m": {},
+											"sap.ui.core": {}
+										}
+									},
+									"rootView": {
+										"viewName": "competencycards.overdueCertificates.view.Main",
+										"type": "XML",
+										"async": true,
+										"id": "main"
+									}
+								}
+							},
+							"vizResources": {
+								"artifactId": "competencycards.overdueCertificates"
+							}
+						}
+					}
+				},
+				"texts": [
+					{
+						"locale": "",
+						"textDictionary": {
+							"CARD_TITLE": "Overdue Certificates",
+							"CARD_SUBTITLE": "Certificates that require renewal now"
 						}
 					}
 				]
@@ -1289,7 +1538,7 @@
 									"title": "{{CARD_TITLE}}",
 									"subTitle": "{{CARD_SUBTITLE}}",
 									"applicationVersion": {
-										"version": "1.0.0"
+										"version": "1.1.5"
 									},
 									"i18n": "i18n/i18n.properties"
 								},
@@ -1297,96 +1546,33 @@
 									"technology": "UI5"
 								},
 								"sap.card": {
-									"type": "Object",
-									"extension": "./CardExtension",
+									"type": "Component",
 									"configuration": {
 										"destinations": {
 											"comp_mat_card": {
 												"name": "comp_mat_card",
-												"defaultUrl": "https://flexso-extensions-dev-cmtrx-v3-cmtrx-srv.cfapps.eu10.hana.ondemand.com"
+												"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
 											}
-										}
-									},
-									"data": {
-										"extension": {
-											"method": "getData"
 										}
 									},
 									"header": {
-										"title": "{defaultFullName}",
-										"subtitle": "{jobCode}",
-										"icon": {
-											"src": "sap-icon://person-placeholder",
-											"shape": "Circle"
+										"title": "{{CARD_TITLE}}",
+										"subTitle": "{{CARD_SUBTITLE}}"
+									}
+								},
+								"sap.ui5": {
+									"dependencies": {
+										"minUI5Version": "1.96.0",
+										"libs": {
+											"sap.m": {},
+											"sap.ui.core": {}
 										}
 									},
-									"content": {
-										"groups": [
-											{
-												"title": "{{GROUP_PERSONAL}}",
-												"items": [
-													{
-														"label": "{{LABEL_DEPARTMENT}}",
-														"value": "{department}"
-													},
-													{
-														"label": "{{LABEL_DIVISION}}",
-														"value": "{division}"
-													},
-													{
-														"label": "{{LABEL_LOCATION}}",
-														"value": "{location}"
-													},
-													{
-														"label": "{{LABEL_MANAGER}}",
-														"value": "{managerName}"
-													}
-												]
-											},
-											{
-												"title": "{{GROUP_CERTS}}",
-												"items": [
-													{
-														"label": "{{LABEL_TOTAL_CERTS}}",
-														"value": "{totalCerts}"
-													},
-													{
-														"label": "{{LABEL_COMPLIANT_CERTS}}",
-														"value": "{compliantCerts}",
-														"state": "Success"
-													},
-													{
-														"label": "{{LABEL_OVERDUE_CERTS}}",
-														"value": "{overdueCerts}",
-														"state": "{overdueState}"
-													},
-													{
-														"label": "{{LABEL_EXPIRING_CERTS}}",
-														"value": "{expiringSoon}",
-														"state": "{expiringState}"
-													}
-												]
-											},
-											{
-												"title": "{{GROUP_COMPS}}",
-												"items": [
-													{
-														"label": "{{LABEL_TOTAL_COMPS}}",
-														"value": "{totalCompetencies}"
-													},
-													{
-														"label": "{{LABEL_ON_TRACK}}",
-														"value": "{onTrackCompetencies}",
-														"state": "Success"
-													},
-													{
-														"label": "{{LABEL_WITH_GAP}}",
-														"value": "{withGapCompetencies}",
-														"state": "{gapState}"
-													}
-												]
-											}
-										]
+									"rootView": {
+										"viewName": "competencycards.profile.view.Main",
+										"type": "XML",
+										"async": true,
+										"id": "main"
 									}
 								}
 							},
@@ -1401,21 +1587,7 @@
 						"locale": "",
 						"textDictionary": {
 							"CARD_TITLE": "Profile Summary",
-							"CARD_SUBTITLE": "Employee Profile Summary",
-							"GROUP_PERSONAL": "Personal Information",
-							"LABEL_DEPARTMENT": "Department",
-							"LABEL_DIVISION": "Division",
-							"LABEL_LOCATION": "Location",
-							"LABEL_MANAGER": "Manager",
-							"GROUP_CERTS": "Certifications",
-							"LABEL_TOTAL_CERTS": "Total Certifications",
-							"LABEL_COMPLIANT_CERTS": "Compliant",
-							"LABEL_OVERDUE_CERTS": "Overdue",
-							"LABEL_EXPIRING_CERTS": "Expiring Soon",
-							"GROUP_COMPS": "Competencies",
-							"LABEL_TOTAL_COMPS": "Total Competencies",
-							"LABEL_ON_TRACK": "On Track",
-							"LABEL_WITH_GAP": "With Gap"
+							"CARD_SUBTITLE": "Employee Profile Summary"
 						}
 					}
 				]

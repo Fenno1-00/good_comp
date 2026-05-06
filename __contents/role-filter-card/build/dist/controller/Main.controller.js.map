@@ -1,0 +1,1 @@
+{"version":3,"file":"Main.controller.js","names":["sap","ui","define","Controller","extend","onRoleChange","oEvent","this","getOwnerComponent","getSource","getSelectedKey"],"sources":["Main-dbg.controller.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CACZ,8BACC,SAAUC,GACX,aAEA,OAAOA,EAAWC,OAAO,6CAA8C,CACrEC,aAAc,SAAUC,GACtBC,KAAKC,oBAAoBH,aAAaC,EAAOG,YAAYC,iBAC3D,GAEJ","ignoreList":[]}

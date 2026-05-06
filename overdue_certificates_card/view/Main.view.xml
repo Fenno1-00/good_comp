@@ -1,0 +1,36 @@
+<mvc:View
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin sapUiSmallMarginTopBottom">
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }"
+      class="sapUiTinyMarginBottom" />
+    <VBox class="sapUiTinyMarginBottom">
+      <Title level="H4" text="{i18n>HEADLINE}" />
+      <Text text="{view>/fullName}" visible="{= !!${view>/fullName} }" />
+      <Text text="{view>/summaryText}" visible="{= !!${view>/summaryText} }" class="sapUiTinyMarginTop" />
+    </VBox>
+    <VBox width="11rem" class="sapUiTinyMarginBottom sapUiMediumMarginTop">
+      <Text text="{i18n>OVERDUE_LABEL}" />
+      <ObjectNumber number="{view>/overdueCount}" state="Error" emphasized="true" class="sapUiTinyMarginTop" />
+    </VBox>
+    <List
+      items="{view>/items}"
+      noDataText="{i18n>NO_ITEMS}"
+      showSeparators="Inner"
+      class="sapUiMediumMarginTop">
+      <CustomListItem>
+        <HBox justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap">
+          <VBox class="sapUiTinyMarginBottom">
+            <Title level="H6" text="{view>title}" />
+            <Text text="{view>subtitle}" visible="{= !!${view>subtitle} }" />
+          </VBox>
+          <ObjectStatus text="{view>infoText}" state="Error" />
+        </HBox>
+      </CustomListItem>
+    </List>
+  </VBox>
+</mvc:View>

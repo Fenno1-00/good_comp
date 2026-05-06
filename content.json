@@ -31,6 +31,22 @@
             "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
         }
     },
+    "role-filter-card":{
+        "type": "card",
+        "src": {
+            "from": "./role_filter_card",
+            "manifest": "manifest.json",
+            "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
+        }
+    },
+    "competency-component-card":{
+        "type": "card",
+        "src": {
+            "from": "./competency_component_card",
+            "manifest": "manifest.json",
+            "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
+        }
+    },
     "competency-assessments-card":{
         "type": "card",
         "src": {
@@ -52,7 +68,7 @@
         "src": {
             "from": "./aggregated_score_card",
             "manifest": "manifest.json",
-            "files": ["CardExtension.js"]
+            "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
         }
     },
     "certifications-list-card":{
@@ -71,12 +87,13 @@
             "files": ["CardExtension.js"]
         }
     },
-    "expiring-soon-card":{
+
+    "overdue-certificates-card":{
         "type": "card",
         "src": {
-            "from": "./expiring_soon_card",
+            "from": "./overdue_certificates_card",
             "manifest": "manifest.json",
-            "files": ["CardExtension.js"]
+            "files": ["Component.js", "view/Main.view.xml", "i18n/i18n.properties"]
         }
     },
     "profile-summary-card":{
@@ -84,7 +101,7 @@
         "src": {
             "from": "./profile_summary_card",
             "manifest": "manifest.json",
-            "files": ["CardExtension.js"]
+            "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
         }
     },
     "all-assessments-card":{

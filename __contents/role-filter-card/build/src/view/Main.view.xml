@@ -1,0 +1,21 @@
+<mvc:View
+  controllerName="competencycards.roleFilter.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin">
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }" />
+    <Label text="{i18n>ROLE_LABEL}" labelFor="roleSelect" />
+    <Select
+      id="roleSelect"
+      change=".onRoleChange"
+      items="{view>/roles}"
+      selectedKey="{view>/selectedRoleId}">
+      <core:Item key="{view>key}" text="{view>title}" />
+    </Select>
+  </VBox>
+</mvc:View>

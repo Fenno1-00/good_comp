@@ -18,6 +18,12 @@
                 "id": "competencycards.assessmentComponentV2.app"
             },
             {
+                "id": "competencycards.roleFilter.app"
+            },
+            {
+                "id": "competencycards.competencyComponent.app"
+            },
+            {
                 "id": "competencycards.competency.app"
             },
             {
@@ -37,6 +43,9 @@
             },
             {
                 "id": "competencycards.expiring.app"
+            },
+            {
+                "id": "competencycards.overdueCertificates.app"
             },
             {
                 "id": "competencycards.all.app"

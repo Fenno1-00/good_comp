@@ -1,0 +1,89 @@
+<mvc:View
+  controllerName="competencycards.profile.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin sapUiSmallMarginTopBottom">
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }"
+      class="sapUiTinyMarginBottom" />
+    <HBox justifyContent="SpaceBetween" alignItems="Start" wrap="Wrap">
+      <HBox alignItems="Start" wrap="Wrap">
+        <core:Icon src="sap-icon://person-placeholder" size="2.4rem" color="#5B738B" class="sapUiTinyMarginTop" />
+        <VBox class="sapUiSmallMarginBegin sapUiTinyMarginTopBottom">
+          <Title level="H4" text="Employee Profile" />
+          <Text text="Employee Details" class="sapUiTinyMarginTop" />
+        </VBox>
+      </HBox>
+      <Text text="{view>/relationLabel}" visible="{= !!${view>/relationLabel} }" />
+    </HBox>
+    <HBox wrap="Wrap" class="sapUiLargeMarginTop">
+      <VBox width="16rem" class="sapUiMediumMarginEnd sapUiMediumMarginBottom">
+        <Title level="H4" text="Personal Information" />
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Full Name:" />
+          <Title level="H6" text="{view>/fullName}" visible="{= !!${view>/fullName} }" />
+          <Text text="-" visible="{= !${view>/fullName} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Email:" />
+          <Title level="H6" text="{view>/email}" visible="{= !!${view>/email} }" />
+          <Text text="-" visible="{= !${view>/email} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="User ID:" />
+          <Title level="H6" text="{view>/userId}" visible="{= !!${view>/userId} }" />
+          <Text text="-" visible="{= !${view>/userId} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Country:" />
+          <Title level="H6" text="{view>/country}" visible="{= !!${view>/country} }" />
+          <Text text="-" visible="{= !${view>/country} }" />
+        </VBox>
+      </VBox>
+      <VBox width="17rem" class="sapUiMediumMarginEnd sapUiMediumMarginBottom">
+        <Title level="H4" text="Organisation" />
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Job Role:" />
+          <Title level="H6" text="{view>/jobCode}" visible="{= !!${view>/jobCode} }" />
+          <Text text="-" visible="{= !${view>/jobCode} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Department:" />
+          <Title level="H6" text="{view>/department}" visible="{= !!${view>/department} }" />
+          <Text text="-" visible="{= !${view>/department} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Division:" />
+          <Title level="H6" text="{view>/division}" visible="{= !!${view>/division} }" />
+          <Text text="-" visible="{= !${view>/division} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Location:" />
+          <Title level="H6" text="{view>/location}" visible="{= !!${view>/location} }" />
+          <Text text="-" visible="{= !${view>/location} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Function:" />
+          <Title level="H6" text="{view>/functionName}" visible="{= !!${view>/functionName} }" />
+          <Text text="-" visible="{= !${view>/functionName} }" />
+        </VBox>
+      </VBox>
+      <VBox width="14rem" class="sapUiMediumMarginBottom">
+        <Title level="H4" text="Manager" />
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Manager:" />
+          <Title level="H6" text="{view>/managerName}" visible="{= !!${view>/managerName} }" />
+          <Text text="No manager assigned" visible="{= !${view>/managerName} }" />
+        </VBox>
+        <VBox class="sapUiMediumMarginTop">
+          <Text text="Team Size:" />
+          <Title level="H6" text="{view>/teamMembersSize}" />
+        </VBox>
+      </VBox>
+    </HBox>
+  </VBox>
+</mvc:View>

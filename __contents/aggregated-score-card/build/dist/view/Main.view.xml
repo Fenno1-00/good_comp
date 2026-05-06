@@ -1,0 +1,48 @@
+<mvc:View
+  controllerName="competencycards.aggregated.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin sapUiSmallMarginTopBottom">
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }"
+      class="sapUiTinyMarginBottom" />
+    <VBox class="sapUiResponsiveMargin sapUiSmallMarginTop sapUiSmallMarginBottom sapUiTinyMarginBegin sapUiTinyMarginEnd">
+      <HBox justifyContent="SpaceBetween" alignItems="Start" wrap="Wrap">
+        <VBox class="sapUiTinyMarginBottom">
+          <Title level="H4" text="{view>/headline}" />
+          <Text text="{view>/fullName}" visible="{= !!${view>/fullName} }" />
+          <Text text="{view>/roleTitle}" visible="{= !!${view>/roleTitle} }" class="sapUiTinyMarginTop" />
+        </VBox>
+        <ObjectStatus
+          text="{view>/statusText}"
+          state="{view>/scoreState}"
+          inverted="true"
+          visible="{= !!${view>/statusText} }" />
+      </HBox>
+      <HBox justifyContent="SpaceBetween" alignItems="End" wrap="Wrap" class="sapUiMediumMarginTop">
+        <VBox width="13rem" class="sapUiTinyMarginEnd sapUiTinyMarginBottom">
+          <Title level="H1" text="{= ${view>/score} + '%' }" />
+          <Text text="{i18n>SCORE_CAPTION}" class="sapUiTinyMarginTop" />
+        </VBox>
+      </HBox>
+      <VBox class="sapUiMediumMarginTop">
+        <ProgressIndicator
+          percentValue="{view>/scoreValue}"
+          displayValue=""
+          state="{view>/scoreState}"
+          height="1.25rem" />
+        <HBox justifyContent="End" class="sapUiTinyMarginTop" wrap="Wrap">
+          <Text text="{= ${i18n>GAP_LABEL} + ': ' + ${view>/shortfall} + '%' }" />
+        </HBox>
+        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTop">
+          <Text text="{i18n>RANGE_LOW}" />
+          <Text text="{i18n>RANGE_MID}" />
+          <Text text="{i18n>RANGE_HIGH}" />
+        </HBox>
+      </VBox>
+    </VBox>
+  </VBox>
+</mvc:View>

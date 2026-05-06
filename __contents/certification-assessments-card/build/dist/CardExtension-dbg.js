@@ -6,10 +6,63 @@ sap.ui.define([
 ], function (Extension, Popover, List, StandardListItem) {
   "use strict";
 
+  var SHARED_ROLE_FILTER_KEY = "competencycards.sharedRoleFilter";
+
+  function getSharedRoleId() {
+    try {
+      return window.localStorage.getItem(SHARED_ROLE_FILTER_KEY) || "";
+    } catch (oError) {
+      return "";
+    }
+  }
+
   return Extension.extend("certification_assessments_card.CardExtension", {
 
     _oGroupedData: null,
     _oPopover: null,
+    _sCurrentRoleId: "",
+
+    init: function () {
+      this._fnSharedRoleChange = this._handleSharedRoleChange.bind(this);
+
+      if (typeof window !== "undefined") {
+        window.addEventListener("storage", this._fnSharedRoleChange);
+        window.addEventListener("competencycards:sharedRoleFilterChanged", this._fnSharedRoleChange);
+      }
+    },
+
+    exit: function () {
+      if (typeof window !== "undefined" && this._fnSharedRoleChange) {
+        window.removeEventListener("storage", this._fnSharedRoleChange);
+        window.removeEventListener("competencycards:sharedRoleFilterChanged", this._fnSharedRoleChange);
+      }
+    },
+
+    _handleSharedRoleChange: function (oEvent) {
+      var sRoleId;
+      var oCard = this.getCard();
+
+      if (!oCard) {
+        return;
+      }
+
+      if (oEvent.type === "storage") {
+        if (oEvent.key !== SHARED_ROLE_FILTER_KEY) {
+          return;
+        }
+
+        sRoleId = oEvent.newValue || "";
+      } else {
+        sRoleId = oEvent.detail && oEvent.detail.roleId || "";
+      }
+
+      if (sRoleId === this._sCurrentRoleId) {
+        return;
+      }
+
+      this._sCurrentRoleId = sRoleId;
+      oCard.refreshData();
+    },
 
     /* ==========================
        Chart slice click handler
@@ -71,10 +124,19 @@ sap.ui.define([
     getData: function () {
       var oCard = this.getCard();
       var oExt = this;
+      var sSharedRoleId = getSharedRoleId();
+
+      this._sCurrentRoleId = sSharedRoleId;
 
       return oCard.resolveDestination("comp_mat_card")
         .then(function (sBaseUrl) {
-          return fetch(sBaseUrl + "/icv/employees/me", {
+          var sUrl = sBaseUrl.replace(/\/$/, "") + "/icv/employees/me";
+
+          if (sSharedRoleId) {
+            sUrl += "?targetRoles=" + encodeURIComponent(sSharedRoleId);
+          }
+
+          return fetch(sUrl, {
             headers: { "Accept": "application/json" }
           });
         })

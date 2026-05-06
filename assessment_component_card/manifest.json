@@ -6,7 +6,7 @@
     "subTitle": "{{CARD_SUBTITLE}}",
     "description": "{{CARD_SUBTITLE}}",
     "applicationVersion": {
-      "version": "1.0.2"
+      "version": "1.0.5"
     },
     "i18n": "i18n/i18n.properties"
   },

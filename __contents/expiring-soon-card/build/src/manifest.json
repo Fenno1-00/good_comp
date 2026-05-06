@@ -5,7 +5,7 @@
     "title": "{{CARD_TITLE}}",
     "subTitle": "{{CARD_SUBTITLE}}",
     "applicationVersion": {
-      "version": "1.0.0"
+      "version": "1.1.4"
     },
     "i18n": "i18n/i18n.properties"
   },
@@ -15,45 +15,33 @@
   },
 
   "sap.card": {
-    "type": "List",
-    "extension": "./CardExtension",
-
+    "type": "Component",
     "configuration": {
       "destinations": {
         "comp_mat_card": {
           "name": "comp_mat_card",
-          "defaultUrl": "https://flexso-extensions-dev-cmtrx-v3-cmtrx-srv.cfapps.eu10.hana.ondemand.com"
+          "defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
         }
       }
     },
-
-    "data": {
-      "extension": {
-        "method": "getData"
-      }
-    },
-
     "header": {
       "title": "{{CARD_TITLE}}",
-      "subtitle": "{defaultFullName}",
-      "status": {
-        "text": "{statusText}"
+      "subTitle": "{{CARD_SUBTITLE}}"
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.96.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
       }
     },
-
-    "content": {
-      "data": {
-        "path": "/items"
-      },
-      "item": {
-        "title": "{title}",
-        "description": "{description}",
-        "highlight": "{highlight}",
-        "info": {
-          "value": "{infoText}",
-          "state": "{infoState}"
-        }
-      }
+    "rootView": {
+      "viewName": "competencycards.expiring.view.Main",
+      "type": "XML",
+      "async": true,
+      "id": "main"
     }
   }
 }
