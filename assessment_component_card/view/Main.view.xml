@@ -18,7 +18,29 @@
       type="Error"
       visible="{= !!${view>/error} }" />
     <HBox alignItems="Center" justifyContent="Center" renderType="Bare" wrap="Wrap">
-      <core:HTML content="{view>/chartMarkup}" sanitizeContent="false" />
+      <core:HTML id="chartHtml" content="{view>/chartMarkup}" sanitizeContent="false" />
+      <List
+        items="{view>/legendItems}"
+        itemPress=".onLegendPress"
+        showSeparators="None"
+        class="sapUiMediumMarginBegin sapUiTinyMarginTop"
+        width="12rem">
+        <CustomListItem type="Active">
+          <HBox
+            justifyContent="SpaceBetween"
+            alignItems="Center"
+            class="sapUiTinyMarginTopBottom sapUiTinyMarginBegin sapUiTinyMarginEnd">
+            <HBox alignItems="Center" class="sapUiTinyMarginEnd">
+              <core:Icon
+                src="sap-icon://circle-task-2"
+                color="{view>color}"
+                class="sapUiTinyMarginEnd" />
+              <Text text="{view>label}" />
+            </HBox>
+            <ObjectNumber number="{view>count}" emphasized="false" />
+          </HBox>
+        </CustomListItem>
+      </List>
     </HBox>
   </VBox>
 </mvc:View>

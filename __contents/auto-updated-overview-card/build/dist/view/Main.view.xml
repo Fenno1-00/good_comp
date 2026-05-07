@@ -1,0 +1,46 @@
+<mvc:View
+  controllerName="competencycards.autoUpdatedOverview.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <VBox busy="{view>/busy}" class="sapUiSmallMargin">
+    <MessageStrip
+      text="{view>/error}"
+      type="Error"
+      visible="{= !!${view>/error} }"
+      class="sapUiTinyMarginBottom" />
+    <Title
+      level="H5"
+      text="{view>/fullName}"
+      visible="{= !!${view>/fullName} }" />
+    <Text
+      text="{view>/summaryText}"
+      visible="{= !!${view>/summaryText} }"
+      class="sapUiSmallMarginTop sapUiTinyMarginBottom" />
+    <List
+      items="{view>/items}"
+      noDataText="{i18n>NO_DATA}"
+      showSeparators="Inner"
+      class="sapUiTinyMarginTop">
+      <CustomListItem>
+        <VBox class="sapUiTinyMarginTop sapUiTinyMarginBottom">
+          <HBox justifyContent="SpaceBetween" alignItems="Start" wrap="Wrap">
+            <Title
+              level="H6"
+              text="{view>title}"
+              class="sapUiTinyMarginEnd" />
+            <ObjectStatus
+              text="{view>statusText}"
+              state="{view>statusState}"
+              class="sapUiTinyMarginBegin" />
+          </HBox>
+          <Text
+            text="{view>detailText}"
+            wrapping="true"
+            maxLines="2"
+            class="sapUiTinyMarginTop" />
+        </VBox>
+      </CustomListItem>
+    </List>
+  </VBox>
+</mvc:View>

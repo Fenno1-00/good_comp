@@ -2,7 +2,7 @@
 	"sap.package": {
 		"id": "Competency_cards",
 		"packageVersion": {
-			"version": "1.3.17",
+			"version": "1.3.57",
 			"upgradeNotification": "all"
 		},
 		"i18n": "i18n/i18n.properties",

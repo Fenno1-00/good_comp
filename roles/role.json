@@ -45,10 +45,16 @@
                 "id": "competencycards.expiring.app"
             },
             {
-                "id": "competencycards.overdueCertificates.app"
+                "id": "competencycards.overdueCertificatesV2.app"
+            },
+            {
+                "id": "competencycards.overdueCertificatesV3.app"
             },
             {
                 "id": "competencycards.all.app"
+            },
+            {
+                "id": "competencycards.autoUpdatedOverview.app"
             }
         ]
     }

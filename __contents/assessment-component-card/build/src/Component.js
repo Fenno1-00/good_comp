@@ -1,11 +1,20 @@
 sap.ui.define([
   "sap/ui/core/UIComponent",
-  "sap/ui/model/json/JSONModel"
-], function (UIComponent, JSONModel) {
+  "sap/ui/model/json/JSONModel",
+  "sap/ui/model/resource/ResourceModel"
+], function (UIComponent, JSONModel, ResourceModel) {
   "use strict";
 
   var SHARED_ROLE_FILTER_KEY = "competencycards.sharedRoleFilter";
   var SHARED_ROLE_FILTER_EVENT = "competencycards:sharedRoleFilterChanged";
+
+  function createBucketItems() {
+    return {
+      lessThanMinusOne: [],
+      equalMinusOne: [],
+      greaterOrEqualZero: []
+    };
+  }
 
   function createGapCounts() {
     return {
@@ -13,6 +22,29 @@ sap.ui.define([
       equalMinusOne: 0,
       greaterOrEqualZero: 0
     };
+  }
+
+  function createLegendItems(oGapCounts) {
+    return [
+      {
+        bucketKey: "lessThanMinusOne",
+        label: "Gap < -1",
+        color: "#BB0000",
+        count: oGapCounts.lessThanMinusOne
+      },
+      {
+        bucketKey: "equalMinusOne",
+        label: "Gap = -1",
+        color: "#E9730C",
+        count: oGapCounts.equalMinusOne
+      },
+      {
+        bucketKey: "greaterOrEqualZero",
+        label: "Gap >= 0",
+        color: "#107E3E",
+        count: oGapCounts.greaterOrEqualZero
+      }
+    ];
   }
 
   function createChartMarkup(oGapCounts) {
@@ -61,7 +93,7 @@ sap.ui.define([
 
         fLength = (oSegment.value / iTotal) * fCircumference;
         aMarkup.push(
-          '<circle cx="' + iCenter + '" cy="' + iCenter + '" r="' + iRadius + '" fill="none" stroke="' + oSegment.color + '" stroke-width="' + iStrokeWidth + '"',
+          '<circle data-gap-bucket="' + oSegment.key + '" cx="' + iCenter + '" cy="' + iCenter + '" r="' + iRadius + '" fill="none" stroke="' + oSegment.color + '" stroke-width="' + iStrokeWidth + '" style="cursor:pointer;"',
           ' stroke-linecap="butt" stroke-dasharray="' + fLength.toFixed(3) + ' ' + (fCircumference - fLength).toFixed(3) + '"',
           ' stroke-dashoffset="' + (-fOffset).toFixed(3) + '"/>',
           ''
@@ -75,22 +107,50 @@ sap.ui.define([
     aMarkup.push('<text x="' + iCenter + '" y="' + (iCenter + 18) + '" text-anchor="middle" font-family="72, Arial, sans-serif" font-size="13" fill="#5B738B">Total</text>');
     aMarkup.push('</svg>');
     aMarkup.push('</div>');
-    aMarkup.push('<div style="display:flex;flex-direction:column;gap:0.75rem;min-width:10rem;">');
-    aSegments.forEach(function (oSegment) {
-      aMarkup.push(
-        '<div style="display:flex;align-items:center;justify-content:space-between;gap:0.875rem;padding:0.7rem 0.95rem;border-radius:0.95rem;background:linear-gradient(180deg,#ffffff 0%,#f7fafc 100%);border:1px solid #e6edf3;box-shadow:0 6px 18px rgba(15,23,42,0.06);">',
-        '<div style="display:flex;align-items:center;gap:0.6rem;min-width:0;">',
-        '<span style="width:0.8rem;height:0.8rem;border-radius:999px;background:' + oSegment.color + ';display:inline-block;flex:none;box-shadow:0 0 0 4px rgba(255,255,255,0.95);"></span>',
-        '<span style="font-family:72, Arial, sans-serif;font-size:0.95rem;color:#223548;white-space:nowrap;">' + oSegment.label + '</span>',
-        '</div>',
-        '<strong style="font-family:72, Arial, sans-serif;font-size:1.1rem;color:#223548;">' + oSegment.value + '</strong>',
-        '</div>'
-      );
-    });
-    aMarkup.push('</div>');
     aMarkup.push('</div>');
 
     return aMarkup.join('');
+  }
+
+  function formatValidUntil(sValidUntil) {
+    if (!sValidUntil) {
+      return "No validity date";
+    }
+
+    return "Valid until: " + sValidUntil.slice(0, 10);
+  }
+
+  function createBucketSummary(aAssessments) {
+    return aAssessments.reduce(function (oSummary, oItem) {
+      var iGap = Number(oItem.gap);
+      var sBucketKey;
+
+      if (isNaN(iGap)) {
+        return oSummary;
+      }
+
+      if (iGap < -1) {
+        sBucketKey = "lessThanMinusOne";
+      } else if (iGap === -1) {
+        sBucketKey = "equalMinusOne";
+      } else {
+        sBucketKey = "greaterOrEqualZero";
+      }
+
+      oSummary.gapCounts[sBucketKey] += 1;
+      oSummary.bucketItems[sBucketKey].push({
+        title: oItem.competence && oItem.competence.externalName || oItem.competenceId || "Unknown",
+        description: [
+          (oItem.status && oItem.status.statusName) || "",
+          formatValidUntil(oItem.validUntil)
+        ].filter(Boolean).join(" | ")
+      });
+
+      return oSummary;
+    }, {
+      gapCounts: createGapCounts(),
+      bucketItems: createBucketItems()
+    });
   }
 
   function matchesCategory(oItem, sCategory) {
@@ -139,6 +199,9 @@ sap.ui.define([
     init: function () {
       UIComponent.prototype.init.apply(this, arguments);
       this.setModel(new JSONModel(this._createViewData()), "view");
+      this.setModel(new ResourceModel({
+        bundleName: "competencycards.assessmentComponentV2.i18n.i18n"
+      }), "i18n");
       this._onSharedRoleFilterChanged = this._handleSharedRoleFilterChanged.bind(this);
 
       if (typeof window !== "undefined") {
@@ -217,6 +280,8 @@ sap.ui.define([
         selectedRoleId: oOptions.selectedRoleId || "",
         hasRoleFilter: !!oOptions.hasRoleFilter,
         gapCounts: oOptions.gapCounts || createGapCounts(),
+        legendItems: oOptions.legendItems || createLegendItems(oOptions.gapCounts || createGapCounts()),
+        bucketItems: oOptions.bucketItems || createBucketItems(),
         chartMarkup: oOptions.chartMarkup || createChartMarkup(oOptions.gapCounts || createGapCounts()),
         error: oOptions.error || ""
       };
@@ -299,7 +364,9 @@ sap.ui.define([
         roles: oCurrentData.roles,
         selectedRoleId: sRequestedRoleId,
         hasRoleFilter: oCurrentData.hasRoleFilter,
-        gapCounts: createGapCounts()
+        gapCounts: createGapCounts(),
+        legendItems: createLegendItems(createGapCounts()),
+        bucketItems: createBucketItems()
       }));
 
       return this._oCard.resolveDestination("comp_mat_card")
@@ -346,23 +413,7 @@ sap.ui.define([
             .filter(function (oItem) {
               return matchesCategory(oItem, "Certification");
             });
-          var oGapCounts = aAssessments.reduce(function (oCounts, oItem) {
-            var iGap = Number(oItem.gap);
-
-            if (isNaN(iGap)) {
-              return oCounts;
-            }
-
-            if (iGap < -1) {
-              oCounts.lessThanMinusOne += 1;
-            } else if (iGap === -1) {
-              oCounts.equalMinusOne += 1;
-            } else if (iGap >= 0) {
-              oCounts.greaterOrEqualZero += 1;
-            }
-
-            return oCounts;
-          }, createGapCounts());
+          var oBucketSummary = createBucketSummary(aAssessments);
 
           oViewModel.setData(this._createViewData({
             busy: false,
@@ -371,8 +422,10 @@ sap.ui.define([
             roles: aRoles,
             selectedRoleId: sResolvedRoleId,
             hasRoleFilter: aRoles.length > 1,
-            gapCounts: oGapCounts,
-            chartMarkup: createChartMarkup(oGapCounts)
+            gapCounts: oBucketSummary.gapCounts,
+            legendItems: createLegendItems(oBucketSummary.gapCounts),
+            bucketItems: oBucketSummary.bucketItems,
+            chartMarkup: createChartMarkup(oBucketSummary.gapCounts)
           }));
         }.bind(this))
         .catch(function () {
@@ -386,6 +439,8 @@ sap.ui.define([
             selectedRoleId: oFailedData.selectedRoleId,
             hasRoleFilter: oFailedData.hasRoleFilter,
             gapCounts: createGapCounts(),
+            legendItems: createLegendItems(createGapCounts()),
+            bucketItems: createBucketItems(),
             chartMarkup: createChartMarkup(createGapCounts()),
             error: "Failed to load data"
           }));

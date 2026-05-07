@@ -1,7 +1,8 @@
 sap.ui.define([
   "sap/ui/core/UIComponent",
-  "sap/ui/model/json/JSONModel"
-], function (UIComponent, JSONModel) {
+  "sap/ui/model/json/JSONModel",
+  "sap/ui/model/resource/ResourceModel"
+], function (UIComponent, JSONModel, ResourceModel) {
   "use strict";
 
   var SHARED_ROLE_FILTER_KEY = "competencycards.sharedRoleFilter";
@@ -21,6 +22,29 @@ sap.ui.define([
       equalMinusOne: 0,
       greaterOrEqualZero: 0
     };
+  }
+
+  function createLegendItems(oGapCounts) {
+    return [
+      {
+        bucketKey: "lessThanMinusOne",
+        label: "Gap < -1",
+        color: "#BB0000",
+        count: oGapCounts.lessThanMinusOne
+      },
+      {
+        bucketKey: "equalMinusOne",
+        label: "Gap = -1",
+        color: "#E9730C",
+        count: oGapCounts.equalMinusOne
+      },
+      {
+        bucketKey: "greaterOrEqualZero",
+        label: "Gap >= 0",
+        color: "#107E3E",
+        count: oGapCounts.greaterOrEqualZero
+      }
+    ];
   }
 
   function createChartMarkup(oGapCounts) {
@@ -83,22 +107,17 @@ sap.ui.define([
     aMarkup.push('<text x="' + iCenter + '" y="' + (iCenter + 18) + '" text-anchor="middle" font-family="72, Arial, sans-serif" font-size="13" fill="#5B738B">Total</text>');
     aMarkup.push('</svg>');
     aMarkup.push('</div>');
-    aMarkup.push('<div style="display:flex;flex-direction:column;gap:0.75rem;min-width:10rem;">');
-    aSegments.forEach(function (oSegment) {
-      aMarkup.push(
-        '<div data-gap-bucket="' + oSegment.key + '" style="display:flex;align-items:center;justify-content:space-between;gap:0.875rem;padding:0.7rem 0.95rem;border-radius:0.95rem;background:linear-gradient(180deg,#ffffff 0%,#f7fafc 100%);border:1px solid #e6edf3;box-shadow:0 6px 18px rgba(15,23,42,0.06);cursor:pointer;">',
-        '<div style="display:flex;align-items:center;gap:0.5rem;min-width:0;">',
-        '<span style="width:0.8rem;height:0.8rem;border-radius:999px;background:' + oSegment.color + ';display:inline-block;flex:none;box-shadow:0 0 0 4px rgba(255,255,255,0.95);"></span>',
-        '<span style="font-family:72, Arial, sans-serif;font-size:0.95rem;color:#223548;white-space:nowrap;">' + oSegment.label + '</span>',
-        '</div>',
-        '<strong style="font-family:72, Arial, sans-serif;font-size:1.1rem;color:#223548;">' + oSegment.value + '</strong>',
-        '</div>'
-      );
-    });
-    aMarkup.push('</div>');
     aMarkup.push('</div>');
 
     return aMarkup.join('');
+  }
+
+  function formatValidUntil(sValidUntil) {
+    if (!sValidUntil) {
+      return "No validity date";
+    }
+
+    return "Valid until: " + sValidUntil.slice(0, 10);
   }
 
   function createBucketSummary(aAssessments) {
@@ -121,7 +140,10 @@ sap.ui.define([
       oSummary.gapCounts[sBucketKey] += 1;
       oSummary.bucketItems[sBucketKey].push({
         title: oItem.competence && oItem.competence.externalName || oItem.competenceId || "Unknown",
-        description: "Gap: " + iGap
+        description: [
+          (oItem.status && oItem.status.statusName) || "",
+          formatValidUntil(oItem.validUntil)
+        ].filter(Boolean).join(" | ")
       });
 
       return oSummary;
@@ -204,6 +226,9 @@ sap.ui.define([
     init: function () {
       UIComponent.prototype.init.apply(this, arguments);
       this.setModel(new JSONModel(this._createViewData()), "view");
+      this.setModel(new ResourceModel({
+        bundleName: "competencycards.competencyComponent.i18n.i18n"
+      }), "i18n");
       this._onSharedRoleFilterChanged = this._handleSharedRoleFilterChanged.bind(this);
 
       if (typeof window !== "undefined") {
@@ -283,6 +308,7 @@ sap.ui.define([
         hasRoleFilter: !!oOptions.hasRoleFilter,
         gapCounts: oOptions.gapCounts || createGapCounts(),
         bucketItems: oOptions.bucketItems || createBucketItems(),
+        legendItems: oOptions.legendItems || createLegendItems(oOptions.gapCounts || createGapCounts()),
         chartMarkup: oOptions.chartMarkup || createChartMarkup(oOptions.gapCounts || createGapCounts()),
         error: oOptions.error || ""
       };
@@ -366,7 +392,8 @@ sap.ui.define([
         selectedRoleId: sRequestedRoleId,
         hasRoleFilter: oCurrentData.hasRoleFilter,
         gapCounts: createGapCounts(),
-        bucketItems: createBucketItems()
+        bucketItems: createBucketItems(),
+        legendItems: createLegendItems(createGapCounts())
       }));
 
       return this._oCard.resolveDestination("comp_mat_card")
@@ -401,7 +428,8 @@ sap.ui.define([
               selectedRoleId: sResolvedRoleId,
               hasRoleFilter: aRoles.length > 1,
               gapCounts: createGapCounts(),
-              bucketItems: createBucketItems()
+              bucketItems: createBucketItems(),
+              legendItems: createLegendItems(createGapCounts())
             }));
 
             return this._loadData(sResolvedRoleId);
@@ -426,6 +454,7 @@ sap.ui.define([
             hasRoleFilter: aRoles.length > 1,
             gapCounts: oBucketSummary.gapCounts,
             bucketItems: oBucketSummary.bucketItems,
+            legendItems: createLegendItems(oBucketSummary.gapCounts),
             chartMarkup: createChartMarkup(oBucketSummary.gapCounts)
           }));
         }.bind(this))
@@ -441,6 +470,7 @@ sap.ui.define([
             hasRoleFilter: oFailedData.hasRoleFilter,
             gapCounts: createGapCounts(),
             bucketItems: createBucketItems(),
+            legendItems: createLegendItems(createGapCounts()),
             chartMarkup: createChartMarkup(createGapCounts()),
             error: "Failed to load data"
           }));

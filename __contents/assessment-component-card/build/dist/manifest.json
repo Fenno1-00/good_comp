@@ -6,7 +6,7 @@
 		"subTitle": "{{CARD_SUBTITLE}}",
 		"description": "{{CARD_SUBTITLE}}",
 		"applicationVersion": {
-			"version": "1.0.5"
+			"version": "1.0.9"
 		},
 		"i18n": "i18n/i18n.properties"
 	},
@@ -22,6 +22,9 @@
 					"defaultUrl": "https://flexso-consumer-dev.launchpad.cfapps.eu10.hana.ondemand.com/dynamic_dest/comp_mat_card"
 				}
 			}
+		},
+		"popover": {
+			"active": true
 		},
 		"header": {
 			"title": "{{CARD_TITLE}}",

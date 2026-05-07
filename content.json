@@ -6,14 +6,6 @@
             "content": "role.json"
         }
     },
-
-    "Competency-card":{
-        "type": "card",
-        "src": {
-            "from": "./employee_profile_card",
-            "manifest": "manifest.json"
-        }
-    },
     "assessments-card":{
         "type": "card",
         "src": {
@@ -45,14 +37,6 @@
             "from": "./competency_component_card",
             "manifest": "manifest.json",
             "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
-        }
-    },
-    "competency-assessments-card":{
-        "type": "card",
-        "src": {
-            "from": "./competency_assessments_card",
-            "manifest": "manifest.json",
-            "files": ["CardExtension.js"]
         }
     },
     "certification-assessments-card":{
@@ -88,7 +72,7 @@
         }
     },
 
-    "overdue-certificates-card":{
+    "overdue-certificates-v2-card":{
         "type": "card",
         "src": {
             "from": "./overdue_certificates_card",
@@ -110,6 +94,14 @@
             "from": "./all_assessments_card",
             "manifest": "manifest.json",
             "files": ["CardExtension.js"]
+        }
+    },
+    "auto-updated-overview-card":{
+        "type": "card",
+        "src": {
+            "from": "./auto_updated_overview_card",
+            "manifest": "manifest.json",
+            "files": ["Component.js", "controller/Main.controller.js", "view/Main.view.xml", "i18n/i18n.properties"]
         }
     }
     

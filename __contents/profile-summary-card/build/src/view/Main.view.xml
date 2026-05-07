@@ -72,7 +72,7 @@
           <Text text="-" visible="{= !${view>/functionName} }" />
         </VBox>
       </VBox>
-      <VBox width="14rem" class="sapUiMediumMarginBottom">
+
         <Title level="H4" text="Manager" />
         <VBox class="sapUiMediumMarginTop">
           <Text text="Manager:" />
@@ -83,7 +83,7 @@
           <Text text="Team Size:" />
           <Title level="H6" text="{view>/teamMembersSize}" />
         </VBox>
-      </VBox>
+   
     </HBox>
   </VBox>
 </mvc:View>

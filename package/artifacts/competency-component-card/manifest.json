@@ -9,7 +9,7 @@
 		"description": "{{CARD_SUBTITLE}}",
 		"i18n": "i18n/i18n.properties",
 		"artifactVersion": {
-			"version": "1.0.5"
+			"version": "1.0.8"
 		}
 	}
 }
